@@ -1,9 +1,8 @@
-## Workpath
+## CalendarApp
 
-Workpath is an iOS app that helps you schedule tasks.
+### Added:
 
-Collaborators: Scott Horsfall, Jeremy Friedland, Jonathan E. Chen
-
-Initial wireframes:
-
-![wireframes v1](wireframes/wireframes-v1.png)
+1. EventKit integration
+2. Pulling calendar names
+3. Pulling calendar colors from iOS
+4. Getting # of events for 30 day range (+/- 15 days)
