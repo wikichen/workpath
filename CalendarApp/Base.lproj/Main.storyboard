@@ -5,32 +5,93 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Events-->
+        <!--Calendars-->
         <scene sceneID="E5r-nc-Kxg">
             <objects>
-                <viewController id="BUF-N6-T3W" customClass="SettingsViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BUF-N6-T3W" customClass="CalendarsViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O3H-Mp-YnL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List of Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AKA-GM-4ZX">
-                                <rect key="frame" x="136" y="323" width="103" height="21"/>
+                            <view alpha="0.0" contentMode="scaleToFill" id="oem-gn-PhP" userLabel="NeedPermissionView">
+                                <rect key="frame" x="20" y="280" width="335" height="107"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app requires access to your calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bul-Sr-Qlm">
+                                        <rect key="frame" x="8" y="24" width="319" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.56470588239999997" green="0.58039215690000001" blue="0.61176470589999998" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zjv-yg-Nfr">
+                                        <rect key="frame" x="59" y="53" width="217" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Request Calendar Access">
+                                            <color key="titleColor" red="0.25098039220000001" green="0.50196078430000002" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onRequestTap:" destination="BUF-N6-T3W" eventType="touchUpInside" id="f1k-mE-ppm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3p1-Ba-S49">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="0.0" reuseIdentifier="basicCell" textLabel="S5B-63-jdR" detailTextLabel="mfF-Wy-0TD" style="IBUITableViewCellStyleSubtitle" id="E6f-o6-8Hp">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E6f-o6-8Hp" id="cC8-EL-zHj">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S5B-63-jdR" userLabel="titleTextLabel">
+                                                    <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="deviceRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mfF-Wy-0TD">
+                                                    <rect key="frame" x="15" y="25.5" width="30.5" height="13.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.56470588235294117" green="0.58039215686274515" blue="0.61176470588235299" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" red="0.25882352941176473" green="0.40392156862745099" blue="0.69803921568627447" alpha="1" colorSpace="deviceRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BUF-N6-T3W" id="ow6-VH-b22"/>
+                                    <outlet property="delegate" destination="BUF-N6-T3W" id="Hi0-sa-KqX"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Events" id="4ks-ba-UBN"/>
+                    <navigationItem key="navigationItem" title="Calendars" id="4ks-ba-UBN"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="calendarNavTitle" destination="4ks-ba-UBN" id="4WJ-ON-UR5"/>
+                        <outlet property="calendarsTableView" destination="3p1-Ba-S49" id="u5a-O2-FU1"/>
+                        <outlet property="needPermissionView" destination="oem-gn-PhP" id="pNS-dH-oLt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBd-Ik-8xF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-303.5" y="1243.5"/>
         </scene>
-        <!--Calendars-->
+        <!--Today-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TodoViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,59 +99,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.0" contentMode="scaleToFill" id="gbJ-mg-w98" userLabel="NeedPermissionView">
-                                <rect key="frame" x="20" y="279" width="335" height="107"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app requires access to your calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bob-mp-hhA">
-                                        <rect key="frame" x="8" y="24" width="319" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.56470588235294117" green="0.58039215686274515" blue="0.61176470588235299" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KWE-q5-LZa">
-                                        <rect key="frame" x="59" y="53" width="217" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <state key="normal" title="Request Calendar Access">
-                                            <color key="titleColor" red="0.25098039215686274" green="0.50196078431372548" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onRequestTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vcY-Mj-IzY"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VeB-YY-8OE" userLabel="calendarCount">
-                                <rect key="frame" x="10" y="74" width="355" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <color key="textColor" red="0.25882352941176473" green="0.40392156862745099" blue="0.69803921568627447" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="K2h-QR-CuN">
-                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="1" id="1YS-JX-DbB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationLevel="1" indentationWidth="10" reuseIdentifier="basicCell" textLabel="w6U-Dv-19D" detailTextLabel="FKI-7O-nja" style="IBUITableViewCellStyleSubtitle" id="vXS-Mf-rYS">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="basicCell" textLabel="fsY-gD-XqB" detailTextLabel="NbR-vN-19l" style="IBUITableViewCellStyleSubtitle" id="T3g-Ed-cGA">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vXS-Mf-rYS" id="7tN-fl-Ax9">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3g-Ed-cGA" id="Kqz-s7-BcW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w6U-Dv-19D" userLabel="titleTextLabel">
-                                                    <rect key="frame" x="25" y="6" width="31.5" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fsY-gD-XqB">
+                                                    <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FKI-7O-nja" userLabel="detailTextLabel">
-                                                    <rect key="frame" x="25" y="25.5" width="30.5" height="13.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NbR-vN-19l">
+                                                    <rect key="frame" x="15" y="25.5" width="30.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.56470588235294117" green="0.58039215686274515" blue="0.61176470588235299" alpha="1" colorSpace="deviceRGB"/>
@@ -100,22 +129,21 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <sections/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Wew-31-7wv"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EZW-NU-Qbl"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="KNo-dd-lfh"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EYp-Uw-xY9"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Calendars" id="wfe-8S-OQC">
-                        <barButtonItem key="leftBarButtonItem" title="Events" id="zyl-rh-GEk">
+                    <navigationItem key="navigationItem" title="Today" id="wfe-8S-OQC">
+                        <barButtonItem key="leftBarButtonItem" title="Calendars" id="zyl-rh-GEk">
                             <connections>
                                 <segue destination="BUF-N6-T3W" kind="push" id="NvO-cg-PpV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Reminders" id="gHu-0K-jfF">
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="gHu-0K-jfF">
                             <connections>
                                 <segue destination="aiQ-QW-20C" kind="push" id="2fe-1Y-WbY"/>
                             </connections>
@@ -123,16 +151,14 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="calendarCountLabel" destination="VeB-YY-8OE" id="50v-ZJ-TcG"/>
-                        <outlet property="calendarsTableView" destination="K2h-QR-CuN" id="z2F-PY-RUP"/>
-                        <outlet property="needPermissionView" destination="gbJ-mg-w98" id="dyl-Sz-4Fi"/>
+                        <outlet property="eventsTableView" destination="1YS-JX-DbB" id="xnl-Nm-P2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="161.5" y="1243.5"/>
         </scene>
-        <!--Reminders-->
+        <!--Create-->
         <scene sceneID="MkY-W6-y88">
             <objects>
                 <viewController id="aiQ-QW-20C" customClass="CreateViewController" customModule="CalendarApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -140,17 +166,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminders TBD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gyl-rW-TQI">
-                                <rect key="frame" x="128" y="323" width="119" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gyl-rW-TQI">
+                                <rect key="frame" x="162" y="323" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Reminders" id="rDK-SF-m7E"/>
+                    <navigationItem key="navigationItem" title="Create" id="rDK-SF-m7E"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPt-Am-VuV" userLabel="First Responder" sceneMemberID="firstResponder"/>

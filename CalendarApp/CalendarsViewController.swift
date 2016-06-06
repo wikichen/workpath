@@ -1,5 +1,5 @@
 //
-//  TodoViewController.swift
+//  CalendarsViewController.swift
 //  CalendarApp
 //
 //  Created by Scott Horsfall on 6/4/16.
@@ -9,19 +9,20 @@
 import UIKit
 import EventKit
 
-class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class CalendarsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
     let eventStore = EKEventStore()
     var calendars: [EKCalendar]?
     
-    var allEvents: [EKEvent]?
+    @IBOutlet weak var calendarNavTitle: UINavigationItem!
     
-    @IBOutlet weak var eventsTableView: UITableView!
+    @IBOutlet weak var needPermissionView: UIView!
+    @IBOutlet weak var calendarsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        eventsTableView.hidden = true
+        calendarsTableView.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,7 +48,9 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
             // We need to help them give us permission
             
-            print("need permission")
+            UIView.animateWithDuration(0.4, animations: {
+                self.needPermissionView.alpha = 1
+            })
         }
     }
     
@@ -66,7 +69,9 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
-                    //need permission
+                    UIView.animateWithDuration(0.4, animations: {
+                        self.needPermissionView.alpha = 1
+                    })
                 })
             }
         })
@@ -74,63 +79,59 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func loadCalendars() {
         self.calendars = eventStore.calendarsForEntityType(EKEntityType.Event)
-        
-        let oneMonthAgo = NSDate(timeIntervalSinceNow: 0*24*3600)
-        let oneMonthAfter = NSDate(timeIntervalSinceNow: 1*24*3600)
-        
-        let predicate = eventStore.predicateForEventsWithStartDate(oneMonthAgo, endDate: oneMonthAfter, calendars: self.calendars)
-        
-        self.allEvents = eventStore.eventsMatchingPredicate(predicate)
-        
     }
     
     func refreshTableView() {
-        eventsTableView.hidden = false
-        eventsTableView.reloadData()
+        calendarsTableView.hidden = false
+        calendarsTableView.reloadData()
+        updateCalendarCountLabel()
     }
-
+    
+    func updateCalendarCountLabel() {
+        let calendars = self.calendars
+        let count = calendars!.count
+        
+        calendarNavTitle.title = "Calendars (\(count))"
+        
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let events = self.allEvents {
-            return events.count
+        if let calendars = self.calendars {
+            return calendars.count
         }
         return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("basicCell")!
         let title = cell.textLabel
         let detail = cell.detailTextLabel
         
-        if let events = self.allEvents {
-            // return name and start/end dates (NSDate)
-            let eventName = events[indexPath.row].title
-            let eventStartDate = events[indexPath.row].startDate
-            let eventEndDate = events[indexPath.row].endDate
+        
+        if let calendars = self.calendars {
+            // return name of calendar
+            let calendarName = calendars[indexPath.row].title
+            // return calendar color from iOS
+            //let calendarColor = calendars[indexPath.row].CGColor
             
-            //format the dates to short time format
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.locale = NSLocale.currentLocale()
+            //let today = NSDate(today)
             
-            dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-            let convertedStartTime = dateFormatter.stringFromDate(eventStartDate)
-            let convertedEndTime = dateFormatter.stringFromDate(eventEndDate)
+            let oneMonthAgo = NSDate(timeIntervalSinceNow: -30*24*3600)
+            let oneMonthAfter = NSDate(timeIntervalSinceNow: 30*24*3600)
             
-            //add these to the view
-            title!.text = eventName
-            detail!.text = "\(String(convertedStartTime))  –  \(String(convertedEndTime))"
+            let predicate = eventStore.predicateForEventsWithStartDate(oneMonthAgo, endDate: oneMonthAfter, calendars: [calendars[indexPath.row]])
+            let events = eventStore.eventsMatchingPredicate(predicate)
             
+            title!.text = calendarName
             //colorBox.backgroundColor = UIColor(CGColor: calendarColor)
+            detail?.text = "Events This Month: \(events.count)"
         } else {
             title!.text = "Unknown Calendar Name"
-            detail!.text = ""
+            detail?.text = "Unknown"
         }
-        
         
         return cell
     }
     
     
 }
-
-
