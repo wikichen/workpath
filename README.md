@@ -6,4 +6,5 @@ Collaborators: Scott Horsfall, Jeremy Friedland, Jonathan E. Chen
 
 Initial wireframes:
 
-![wireframes v1](wireframes/wireframes-v2.png)
+![wireframes v2](wireframes/wireframes-v2.png)
+![wireframes v2b](wireframes/wireframes-v2b.png)
